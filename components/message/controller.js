@@ -1,3 +1,5 @@
+const store = require("./store");
+
 const addMessagePromise = (user, message) => {
   return new Promise((resolve, reject) => {
     if (user && message) {
@@ -7,15 +9,22 @@ const addMessagePromise = (user, message) => {
         date: new Date(),
       };
 
-      console.log(`User: ${user}, Message: ${message}`);
+      store.add(fullMessage);
       resolve(fullMessage);
     } else {
-      console.error("[messageCrontroller] There's not user or menssage");
+      console.error("[messageCrontroller] There's not user or message");
       reject("Incorrect info");
     }
   });
 };
 
+const getMessagesPromise = () => {
+  return new Promise((resolve, reject) => {
+    resolve(store.list());
+  });
+};
+
 module.exports = {
   addMessagePromise,
+  getMessagesPromise,
 };
