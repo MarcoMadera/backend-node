@@ -18,13 +18,25 @@ const addMessagePromise = (user, message) => {
   });
 };
 
-const getMessagesPromise = () => {
+const getMessagesPromise = (filterUser) => {
   return new Promise((resolve, reject) => {
-    resolve(store.list());
+    resolve(store.list(filterUser));
+  });
+};
+
+const updateMessagePromise = (id, message) => {
+  return new Promise(async (resolve, reject) => {
+    if (id && message) {
+      const res = await store.updateText(id, message);
+      resolve(res);
+    } else {
+      reject("Invalid data");
+    }
   });
 };
 
 module.exports = {
   addMessagePromise,
   getMessagesPromise,
+  updateMessagePromise,
 };
