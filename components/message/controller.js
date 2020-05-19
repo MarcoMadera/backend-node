@@ -27,7 +27,7 @@ const getMessagesPromise = (filterUser) => {
 const updateMessagePromise = (id, message) => {
   return new Promise(async (resolve, reject) => {
     if (id && message) {
-      const res = await store.updateMessage(id, message);
+      const res = await store.update(id, message);
       resolve(res);
     } else {
       reject("Invalid data");
