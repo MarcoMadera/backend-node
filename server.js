@@ -1,6 +1,7 @@
 const express = require("express");
 const router = require("./network/routes");
 const db = require("./db");
+require("dotenv").config();
 
 const db_user = encodeURIComponent(process.env.DB_USER);
 const db_password = encodeURIComponent(process.env.DB_PASSWORD);
