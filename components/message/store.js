@@ -31,7 +31,7 @@ async function getMessages(filterUser) {
   return messages;
 }
 
-async function updateText(id, message) {
+async function updateMessage(id, message) {
   const foundMessage = await Model.findOne({
     _id: id,
   });
@@ -41,8 +41,15 @@ async function updateText(id, message) {
   return newMessage;
 }
 
+function removeMessage(id) {
+  return Model.deleteOne({
+    _id: id,
+  });
+}
+
 module.exports = {
   add: addMessage,
   list: getMessages,
-  updateText: updateText,
+  updateMessage: updateMessage,
+  remove: removeMessage,
 };

@@ -27,10 +27,27 @@ const getMessagesPromise = (filterUser) => {
 const updateMessagePromise = (id, message) => {
   return new Promise(async (resolve, reject) => {
     if (id && message) {
-      const res = await store.updateText(id, message);
+      const res = await store.updateMessage(id, message);
       resolve(res);
     } else {
       reject("Invalid data");
+    }
+  });
+};
+
+const deleteMessagePromise = (id) => {
+  return new Promise((resolve, reject) => {
+    if (id) {
+      store
+        .remove(id)
+        .then(() => {
+          resolve();
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    } else {
+      reject("Invalid id");
     }
   });
 };
@@ -39,4 +56,5 @@ module.exports = {
   addMessagePromise,
   getMessagesPromise,
   updateMessagePromise,
+  deleteMessagePromise,
 };
