@@ -5,14 +5,31 @@ function addMessage(message) {
   myMessage.save();
 }
 
-async function getMessages(filterUser) {
-  let filter = {};
-  if (filterUser != null) {
-    filter = { user: new RegExp(`^${filterUser}$`, "i") };
-  }
-  const messages = await Model.find(filter);
-  return messages;
-}
+const getMessagesPromise = async (filterUser) => {
+  return new Promise((resolve, reject) => {
+    let filter = {};
+    if (filterUser !== null) {
+      filter = { user: new RegExp(`^${filterUser}$`, "i") };
+    }
+
+    Model.find(filter)
+      .populate("user")
+      .exec((error, populated) => {
+        if (!error) {
+          resolve(populated);
+        }
+        reject(error);
+      });
+  });
+};
+// async function getMessages(filterUser) {
+//   let filter = {};
+//   if (filterUser != null) {
+//     filter = { user: new RegExp(`^${filterUser}$`, "i") };
+//   }
+//   const messages = Model.find(filter);
+//   return messages;
+// }
 
 async function updateMessage(id, message) {
   const foundMessage = await Model.findOne({
@@ -32,7 +49,7 @@ function removeMessage(id) {
 
 module.exports = {
   add: addMessage,
-  list: getMessages,
+  list: getMessagesPromise,
   update: updateMessage,
   remove: removeMessage,
 };
