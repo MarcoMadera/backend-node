@@ -4,7 +4,7 @@ const controller = require("./controller");
 const router = express.Router();
 
 router.get("/", function (req, res) {
-  const filterMessages = req.query.user || null;
+  const filterMessages = req.query.chat || null;
   controller
     .getMessagesPromise(filterMessages)
     .then((messageList) => response.success(req, res, messageList, 200))
@@ -13,7 +13,7 @@ router.get("/", function (req, res) {
 
 router.post("/", function (req, res) {
   controller
-    .addMessagePromise(req.body.user, req.body.message)
+    .addMessagePromise(req.body.chat, req.body.user, req.body.message)
     .then(() => response.success(req, res, "Submitted", 201))
     .catch(() =>
       response.error(req, res, "Invalid info", 400, "Controller error")

@@ -1,9 +1,10 @@
 const store = require("./store");
 
-const addMessagePromise = (user, message) => {
+const addMessagePromise = (chat, user, message) => {
   return new Promise((resolve, reject) => {
     if (user && message) {
       const fullMessage = {
+        chat: chat,
         user: user,
         message: message,
         date: new Date(),
@@ -12,15 +13,15 @@ const addMessagePromise = (user, message) => {
       store.add(fullMessage);
       resolve(fullMessage);
     } else {
-      console.error("[messageCrontroller] There's not user or message");
+      console.error("[messageCrontroller] There's not chat, user or message");
       reject("Incorrect info");
     }
   });
 };
 
-const getMessagesPromise = (filterUser) => {
+const getMessagesPromise = (filterChat) => {
   return new Promise((resolve, reject) => {
-    resolve(store.list(filterUser));
+    resolve(store.list(filterChat));
   });
 };
 

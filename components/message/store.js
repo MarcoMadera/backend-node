@@ -5,15 +5,15 @@ function addMessage(message) {
   myMessage.save();
 }
 
-const getMessagesPromise = async (filterUser) => {
+const getMessagesPromise = (filterChat) => {
   return new Promise((resolve, reject) => {
     let filter = {};
-    if (filterUser !== null) {
-      filter = { user: new RegExp(`^${filterUser}$`, "i") };
+    if (filterChat !== null) {
+      filter = { chat: filterChat };
     }
 
     Model.find(filter)
-      .populate("user")
+      .populate("chat")
       .exec((error, populated) => {
         if (!error) {
           resolve(populated);
@@ -22,14 +22,6 @@ const getMessagesPromise = async (filterUser) => {
       });
   });
 };
-// async function getMessages(filterUser) {
-//   let filter = {};
-//   if (filterUser != null) {
-//     filter = { user: new RegExp(`^${filterUser}$`, "i") };
-//   }
-//   const messages = Model.find(filter);
-//   return messages;
-// }
 
 async function updateMessage(id, message) {
   const foundMessage = await Model.findOne({
