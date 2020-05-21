@@ -1,7 +1,12 @@
 const express = require("express");
+const multer = require("multer");
 const response = require("../../network/response");
 const controller = require("./controller");
 const router = express.Router();
+
+const upload = multer({
+  dest: "public/files/",
+});
 
 router.get("/", function (req, res) {
   const filterMessages = req.query.chat || null;
@@ -11,10 +16,10 @@ router.get("/", function (req, res) {
     .catch((e) => response.error(req, res, "Unexpected Error", 500, e));
 });
 
-router.post("/", function (req, res) {
+router.post("/", upload.single("file"), function (req, res) {
   controller
-    .addMessagePromise(req.body.chat, req.body.user, req.body.message)
-    .then(() => response.success(req, res, "Submitted", 201))
+    .addMessagePromise(req.body.chat, req.body.user, req.body.message, req.file)
+    .then((data) => response.success(req, res, data, 201))
     .catch(() =>
       response.error(req, res, "Invalid info", 400, "Controller error")
     );
