@@ -20,9 +20,7 @@ router.post("/", upload.single("file"), function (req, res) {
   controller
     .addMessagePromise(req.body.chat, req.body.user, req.body.message, req.file)
     .then((data) => response.success(req, res, data, 201))
-    .catch(() =>
-      response.error(req, res, "Invalid info", 400, "Controller error")
-    );
+    .catch((e) => response.error(req, res, "Invalid info", 400, e));
 });
 
 router.patch("/:id", function (req, res) {

@@ -12,8 +12,13 @@ const getMessagesPromise = (filterChat) => {
       filter = { chat: filterChat };
     }
 
+    const populateQuery = [
+      { path: "chat", select: "name" },
+      { path: "user", select: "user" },
+    ];
+
     Model.find(filter)
-      .populate("chat")
+      .populate(populateQuery)
       .exec((error, populated) => {
         if (!error) {
           resolve(populated);
