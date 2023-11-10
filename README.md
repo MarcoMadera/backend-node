@@ -1,95 +1,158 @@
-# Chat App 
+# Chat App
 
 ### Wiki Methods
+
 #### User
 
 ##### get
+
 ```javascript
-'/user/'                        //Response: User list
-`/user/?user=${userName}`       //Response: User info
+"/user/" //Response: User list
+`/user/?user=${userName}`; //Response: User info
 ```
+
 ##### post
+
 ```javascript
-'/user/'
+"/user/";
 ```
+
 ```json
 {
-  "user": "'userName'"
+  "user": "userName"
 }
 ```
+
 ##### patch
+
 ```javascript
-'/user/userId'
+"/user/userId";
 ```
+
 ```json
 {
-  "user": "'userName'"
+  "user": {
+    "_id": "654db8bf729fab06122ac58a",
+    "name": "Marco 2"
+  }
 }
 ```
+
 ##### delete
+
 ```javascript
-'/user/userId'
+"/user/userId";
 ```
+
 #### Message
 
 ##### get
+
 ```javascript
-'/message/'                     //Response: Message list
-`/message/?chat=${chatId}`      //Response: Chat Messages
+"/message/" //Response: Message list
+`/message/?chat=${chatId}`; //Response: Chat Messages
 ```
+
 ##### post
+
 ```javascript
-'/message/'
+"/message/";
 ```
+
 ```json
 {
-  "chat": "'chatId'",
-	"user": "userId",
-	"message": "String"
+  "chat": {
+    "_id": "654dba33729fab06122ac596",
+    "name": "myChat"
+  },
+  "user": {
+    "_id": "654db8bf729fab06122ac58e",
+    "name": "Marco"
+  },
+  "message": "My message"
 }
 ```
+
 ##### patch
+
 ```javascript
-'/message/messageId'
+"/message/messageId";
 ```
+
 ```json
 {
-  "chat": "'chatId'",
-	"user": "userId",
-	"message": "String"
+  "chat": {
+    "_id": "654dba33729fab06122ac596",
+    "name": "myChat"
+  },
+  "user": {
+    "_id": "654db8bf729fab06122ac58e",
+    "name": "Marco"
+  },
+  "message": "My message"
 }
 ```
+
 ##### delete
+
 ```javascript
-'/message/messageId'
+"/message/messageId";
 ```
+
 #### Chat
 
 ##### get
+
 ```javascript
-`/chat/{userId}`      //Response: user chats
+`/chat/{userId}`; //Response: user chats
 ```
+
 ##### post
+
 ```javascript
-'/chat/'
+"/chat/";
 ```
+
 ```json
 {
-	"name": "StringName",
-  "users": ["UsersIdArray","UserId"]
+  "name": "StringName",
+  "users": [
+    {
+      "_id": "654db8bf729fab06122ac58e",
+      "name": "Marco 1"
+    },
+    {
+      "_id": "654db8bf729fab06122ac58a",
+      "name": "Marco 2"
+    }
+  ]
 }
 ```
+
 ##### patch
+
 ```javascript
-'/chat/chatId'
+"/chat/chatId";
 ```
+
 ```json
 {
-	"name": "StringName",
-  "users": ["UsersIdArray","UserId"]
+  "name": "StringName",
+  "users": [
+    {
+      "_id": "654db8bf729fab06122ac58e",
+      "name": "Marco 1"
+    },
+    {
+      "_id": "654db8bf729fab06122ac58a",
+      "name": "Marco 2"
+    }
+  ]
 }
 ```
+
 ##### delete
+
 ```javascript
-'/chat/chatId'
+"/chat/chatId";
 ```
