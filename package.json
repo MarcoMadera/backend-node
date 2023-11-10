@@ -2,9 +2,11 @@
   "name": "backend-node",
   "version": "0.1.0",
   "description": "A chat",
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/server.js",
+    "build": "node_modules/.bin/tsc",
+    "lint": "eslint . --fix"
   },
   "keywords": [
     "chat",
@@ -13,11 +15,24 @@
   "author": "Marco Madera <marcomaderaa@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.9.14",
-    "multer": "^1.4.2",
-    "socket.io": "^2.3.0"
+    "cors": "2.8.5",
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "mongoose": "8.0.0",
+    "multer": "1.4.2",
+    "socket.io": "4.7.2"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.21",
+    "@types/multer": "^1.4.10",
+    "@typescript-eslint/eslint-plugin": "6.10.0",
+    "@typescript-eslint/parser": "6.10.0",
+    "eslint": "8.53.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-import-resolver-node": "^0.3.9",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "5.0.1",
+    "prettier": "3.0.3",
+    "typescript": "5.2.2"
   }
 }

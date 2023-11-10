@@ -24,7 +24,7 @@ async function postMessage(chatId, userId, message) {
         message: message,
       }),
     };
-    const response = await fetch(`http://localhost:3000/message`, fetchOptions);
+    const response = await fetch("http://localhost:3000/message", fetchOptions);
     const data = await response.json();
     return data;
   } catch (error) {
